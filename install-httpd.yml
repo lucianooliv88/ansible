@@ -1,0 +1,17 @@
+---
+  - name: installing httpd
+    hosts: all
+
+
+    tasks:
+            - name: installing httpd
+              command: yum install httpd -y
+              become: yes
+              become_user: root
+
+            - name: starting httpd
+              command: service httpd start
+              become: yes
+              become_user: root
+
+            

@@ -1,0 +1,49 @@
+--
+  - name: installing JDK and tomcat
+    hosts: all
+
+
+    tasks:
+            - name: installing JDK
+              command: yum install java-1.8* -y
+              become: yes
+              become_user: root
+
+            - name: copying bash_profile file
+              copy: src=templates/bash_profile dest=/.bash_profile owner=root group=root mode=0640
+              become: yes
+              become_user: root
+
+            - name: downloading tomcat
+              command: wget https://ftp.heanet.ie/mirrors/www.apache.org/dist/tomcat/tomcat-8/v8.5.63/bin/apache-tomcat-8.5.63.tar.gz
+              become: yes
+              become_user: root
+
+            - name: Pause for 100 seconds to download...
+              pause:
+                      seconds: 100
+
+            - name: unzipping tomcat
+              command: tar -xvzf apache-tomcat-8.5.63.tar.gz
+              become: yes
+              become_user: root
+
+            - name: moving tomcat to right folder
+              command: mv apache-tomcat-8.5.63 /opt/tomcat
+              become: yes
+              become_user: root
+
+            - name: allowing exec start
+              command: chmod +x /opt/tomcat/bin/startup.sh
+              become: yes
+              become_user: root
+
+            - name: allowing exec shutdown
+              command: chmod +x /opt/tomcat/bin/shutdown.sh
+              become: yes
+              become_user: root
+
+            - name: starting tomcat
+              command: sh /opt/tomcat/bin/startup.sh
+              become: yes
+              become_user: root
