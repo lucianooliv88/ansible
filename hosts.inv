@@ -1,3 +1,3 @@
 [servers]
-172.31.31.111 ansible_user=ec2-user 
-172.31.0.21 ansible_user=ec2-user 
+172.31.11.84 ansible_user=ec2-user 
+172.31.24.174 ansible_user=ec2-user 
